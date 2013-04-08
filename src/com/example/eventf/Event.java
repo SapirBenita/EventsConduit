@@ -56,9 +56,9 @@ public class Event {
 		this.mDescription = description;
 	}
 
-	public void setLocation(String place) {
+	public void setLocation(String location) {
 
-		this.mlocation = place;
+		this.mlocation = location;
 	}
 
 	public void setTitle(String title) {
@@ -99,12 +99,12 @@ public class Event {
 		return month;
 	}
 
-	public String getData() {
+	public String getDescription() {
 
 		return mDescription;
 	}
 
-	public String getPlace() {
+	public String getlocation() {
 
 		return mlocation;
 	}

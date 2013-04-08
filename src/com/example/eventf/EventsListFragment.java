@@ -66,8 +66,7 @@ public class EventsListFragment extends ListFragment {
 
 	public class UserItemAdapter extends ArrayAdapter<Event> {
 
-		public UserItemAdapter(Context context, int textViewResourceId,
-				ArrayList<Event> events) {
+		public UserItemAdapter(Context context, int textViewResourceId,ArrayList<Event> events) {
 			super(context, textViewResourceId, events);
 		}
 		
@@ -79,23 +78,18 @@ public class EventsListFragment extends ListFragment {
 			EventItemViewHolder viewHolder = null;
 			if (convertView == null) {
 				// if null we need to create
-				LayoutInflater vi = (LayoutInflater) getContext()
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				LayoutInflater vi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				convertView = vi.inflate(R.layout.events_list_activitiy, null);
 				viewHolder = new EventItemViewHolder();
 				viewHolder.day = (TextView) convertView.findViewById(R.id.day);
-				viewHolder.place = (TextView) convertView
-						.findViewById(R.id.place);
-				viewHolder.hours = (TextView) convertView
-						.findViewById(R.id.hours);
-				viewHolder.title = (TextView) convertView
-						.findViewById(R.id.title);
-				viewHolder.month = (TextView) convertView
-						.findViewById(R.id.month);
-				viewHolder.year = (TextView) convertView
-						.findViewById(R.id.year);
+				viewHolder.location = (TextView) convertView.findViewById(R.id.location);
+				viewHolder.hours = (TextView) convertView.findViewById(R.id.hours);
+				viewHolder.title = (TextView) convertView.findViewById(R.id.title);
+				viewHolder.month = (TextView) convertView.findViewById(R.id.month);
+				viewHolder.year = (TextView) convertView.findViewById(R.id.year);
 				convertView.setTag(viewHolder);
-			} else {
+			} 
+			else {//if is not null , Recycling happens
 				viewHolder = (EventItemViewHolder) convertView.getTag();
 			}
 
@@ -107,7 +101,7 @@ public class EventsListFragment extends ListFragment {
 				viewHolder.title.setText(event.getTitle());
 				viewHolder.month.setText(event.getMonth().toUpperCase());
 				viewHolder.day.setText(event.getDay());
-				viewHolder.place.setHint(event.getPlace());
+				viewHolder.location.setHint(event.getlocation());
 				viewHolder.hours.setHint(event.getHours());
 			}
 			return convertView;
@@ -117,7 +111,7 @@ public class EventsListFragment extends ListFragment {
 
 	private static class EventItemViewHolder {
 		private TextView day;
-		private TextView place;
+		private TextView location;
 		private TextView hours;
 		private TextView title;
 		private TextView month;
@@ -163,9 +157,9 @@ public class EventsListFragment extends ListFragment {
 			e.printStackTrace();
 		}
 
-		String date, dayString, day, hours, month, location, title;
+		String date, dayString, day, hours, month, location;
 		String year;
-		String imageUrl;
+		
 		long startTime;
 		long endTime;
 		long gmt;
@@ -178,15 +172,17 @@ public class EventsListFragment extends ListFragment {
 				Event event = new Event();
 				
 				eventDetailsJsonObj=jsonArray.getJSONObject(i);
+				
 				event.setDescription(eventDetailsJsonObj.optString("description"));
-				
-				
-				location = (eventDetailsJsonObj).optString("location");
-				title = (eventDetailsJsonObj).optString("title");
-				imageUrl = (eventDetailsJsonObj).optString("imageUrl");
+				location= eventDetailsJsonObj.optString("location");
+				location=location+"\n";
+				event.setLocation(location);
+				event.setTitle(eventDetailsJsonObj.optString("title"));
+				event.setImageUrl(eventDetailsJsonObj.optString("imageUrl"));
 
 				jsonArrayTimes = (eventDetailsJsonObj).getJSONArray("times");
 				jsonObjectTimes=jsonArrayTimes.getJSONObject(0);
+				
 				endTime = jsonObjectTimes.getJSONObject("end").optLong("localTime");
 				startTime = jsonObjectTimes.getJSONObject("start").optLong("localTime");
 				gmt = jsonObjectTimes.getJSONObject("start").optLong("timeZoneOffset");
@@ -224,16 +220,14 @@ public class EventsListFragment extends ListFragment {
 					hours = hours + ")";
 				date = dayString + ",  " + month + " " + day + ", " + year;
 
-				location = location + "\n";
+			
 
-				event.setImageUrl(imageUrl);
-				event.setLocation(location);
-				event.setTitle(title);
 				event.setHours(hours);
 				event.setDay(day);
 				event.setMonth(month);
 				event.setYear(year);
-				event.setDate(date); 
+				event.setDate(date);
+				
 				events.add(event);
 
 			}

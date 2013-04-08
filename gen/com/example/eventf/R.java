@@ -44,8 +44,8 @@ public final class R {
         public static final int frameLayout2=0x7f090005;
         public static final int hours=0x7f090003;
         public static final int img=0x7f09000b;
+        public static final int location=0x7f090008;
         public static final int month=0x7f09000c;
-        public static final int place=0x7f090008;
         public static final int textView1=0x7f090007;
         public static final int title=0x7f090004;
         public static final int titles=0x7f09000f;

@@ -93,7 +93,7 @@
             android:textStyle="bold" />
         
          <TextView
-            android:id="@+id/place"
+            android:id="@+id/location"
            android:layout_toRightOf="@+id/frame1"
             android:layout_marginLeft="5dp"
             android:layout_width="280dp"
