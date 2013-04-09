@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-  
-    
-    
-    
-    
-    
-    <padding android:left="140dp" android:top="40dp"
-            android:right="140dp" android:bottom="40dp"
-             />
-  
-  
-    <corners android:bottomRightRadius="10dp"
-        android:topRightRadius="10dp"
-        />
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <padding
+        android:bottom="40dp"
+        android:left="140dp"
+        android:right="140dp"
+        android:top="40dp" />
+
+    <corners
+        android:bottomRightRadius="10dp"
+        android:topRightRadius="10dp" />
+
     <solid android:color="#696969" />
-</shape> 
+
+</shape>

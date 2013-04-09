@@ -1,160 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-   
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-        	   
-              >
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
 
-
-
-     <LinearLayout 
-        android:orientation="vertical"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        
-              >
+        android:orientation="vertical" >
 
-    
+        <FrameLayout
+            android:id="@+id/frameLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
 
-    <FrameLayout
-        
-        android:id="@+id/frameLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-    	
-        
-        >
+            <ImageView
+                android:id="@+id/background"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="fitXY" />
 
-      
-        
-        <ImageView
-          
-             android:id="@+id/background"
-             android:layout_width="fill_parent"
-             android:layout_height="fill_parent"
-             android:scaleType="fitXY"/>
-        
-       
-         <LinearLayout 
-              android:orientation="horizontal"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:weightSum="100"
-              >
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                android:weightSum="100" >
 
-        <ImageView
-             
-       android:layout_weight="70"
-        android:layout_height="fill_parent"
-        android:layout_width="0dp"
-        android:layout_marginTop="27dp"
-         android:layout_marginBottom="15dp"
-         android:background="@drawable/datail_rectangle"
-        
-            
-             />
-</LinearLayout>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="27dp"
+                    android:layout_weight="70"
+                    android:background="@drawable/datail_rectangle" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="35dp"
+                android:text="marth 2013"
+                android:textColor="#ffffff"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/hours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="47dp"
+                android:text="223424"
+                android:textColor="#ffffff"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="61dp"
+                android:text="fjhdfhkdsf"
+                android:textColor="#ffffff"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/frameLayout1"
+            android:background="#DCDFDC" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/share_rectangle" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/share" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="14dp"
+                android:text="Share"
+                android:textColor="#ffffff"
+                android:textSize="10dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp" />
+        </FrameLayout>
+
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/frameLayout2"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="35dp"
-            android:text="marth 2013"
-            android:textColor="#ffffff"
-            android:textSize="10dp" />
-
-        <TextView
-            android:id="@+id/hours"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="47dp"
-            android:text="223424"
-            android:textColor="#ffffff"
-            android:textSize="10dp" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="260dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="61dp"
-            android:text="fjhdfhkdsf"
-            android:textColor="#ffffff"
-            android:textSize="15dp"
+            android:layout_marginTop="6dp"
+            android:text="Location"
             android:textStyle="bold" />
-    </FrameLayout>
 
-    
-
-   
-
-    <FrameLayout
-        android:id="@+id/frameLayout2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/frameLayout1"
-        android:background="#DCDFDC" >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/share_rectangle" />
-
-        
-         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="13dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/share" />
-         
         <TextView
+            android:id="@+id/location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="14dp"
-            android:text="Share"
-            android:textColor="#ffffff"
-            android:textSize="10dp"
-            android:textStyle="bold" />
-        
-        <TextView
-        android:id="@+id/data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp" />
-        
-    </FrameLayout>
-    
-    
-     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/frameLayout2"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="6dp"
-        android:text="Location"
-        android:textStyle="bold" />
+            android:layout_below="@+id/textView1"
+            android:layout_marginLeft="15dp"
+            android:text="place"
+            android:textSize="13dp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/location"
-        android:layout_below="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-    
-        android:text="place"
-        android:textSize="13dp" />
-
-</LinearLayout>
 </ScrollView>

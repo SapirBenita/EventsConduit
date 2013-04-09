@@ -2,78 +2,77 @@ package com.example.eventf;
 
 import android.os.Bundle;
 
+/**
+ * A class representing a single event from the events list.
+ * 
+ * @author Sapir.Benita
+ *
+ */
 public class Event {
 
-	
-	long endTime; 
-	long startTime;
-	long gmt;
-	//private String mDate;
+	private long mEndTime;
+	private long mStartTime;
+	private long mGmt;
 	private String mDescription;
-	//private String mDay;
-	//private String month;
 	private String mlocation;
-	//private String hours;
-	private String title;
-//	private String year;
-	private String imageUrl;
-    static final String DATA="Data";
-   
-	public Event() { }
+	private String mTitle;
+	private String mImageUrl;
+	
+	// keys to convert this event to a bundle and vice versa.
+	private static final String END_TIME = "EndTime";
+	private static final String STRAT_TIME = "StartTime";
+	private static final String GMT = "Gmt";
+	private static final String DESCRIPTION = "Description";
+	private static final String LOCATION = "Location";
+	private static final String TITLE = "Title";
+	private static final String IMAGE_URL = "ImageUrl";
+
+	public Event() {
+	}
 
 	public Event(Bundle dataBundle) {
-		mDescription = dataBundle.getString("Data");
-		//hours = dataBundle.getString("Hours");
-		mlocation = dataBundle.getString("Place");
-		title = dataBundle.getString("Title");
-		//mDate = dataBundle.getString("Date");
-		imageUrl = dataBundle.getString("Image");
-		endTime = dataBundle.getLong("EndTime");
-		startTime = dataBundle.getLong("StartTime");
-		 gmt = dataBundle.getLong("Gmt");
+		
+		mDescription = dataBundle.getString(DESCRIPTION);
+		mlocation = dataBundle.getString(LOCATION);
+		mTitle = dataBundle.getString(TITLE);
+		mImageUrl = dataBundle.getString(IMAGE_URL);
+		mEndTime = dataBundle.getLong(END_TIME);
+		mStartTime = dataBundle.getLong(STRAT_TIME);
+		mGmt = dataBundle.getLong(GMT);
+
+	}
+
+	public Bundle toBundle() {
+
+		Bundle bundle = new Bundle();
+		bundle.putString(DESCRIPTION, mDescription);
+		bundle.putString(LOCATION, mlocation);
+		bundle.putString(IMAGE_URL, mImageUrl);
+		bundle.putLong(GMT, mGmt);
+		bundle.putString(TITLE, mTitle);
+		bundle.putLong(STRAT_TIME, mStartTime);
+		bundle.putLong(END_TIME, mEndTime);
+
+		return bundle;
 	}
 	
+	/** setters **/
+
 	public void setEndTime(Long endTime) {
 
-		this.endTime = endTime;
+		this.mEndTime = endTime;
 	}
 
 	public void setStartTime(Long startTime) {
 
-		this.startTime = startTime;
+		this.mStartTime = startTime;
 	}
-	
+
 	public void setGmt(Long gmt) {
 
-		this.gmt = gmt;
-	}
-	
-	
-	/*public void setHours(String hours) {
-
-		this.hours = hours;
-	}*/
-
-/*	public void setDay(String day) {
-
-		this.mDay = day;
-	}*/
-
-	/*public void setYear(String year) {
-
-		this.year = year;
-	}*/
-/*
-	public void setDate(String date) {
-
-		this.mDate = date;
+		this.mGmt = gmt;
 	}
 
-	public void setMonth(String month) {
-
-		this.month = month;
-	}
-*/
 	public void setDescription(String description) {
 
 		this.mDescription = description;
@@ -86,42 +85,18 @@ public class Event {
 
 	public void setTitle(String title) {
 
-		this.title = title;
+		this.mTitle = title;
 
 	}
 
 	public void setImageUrl(String imageUrl) {
 
-		this.imageUrl = imageUrl;
+		this.mImageUrl = imageUrl;
 
 	}
 
-	/** Setters **/
+	/** getters **/
 
-	/*public String getHours() {
-		return hours;
-	}
-
-	public String getDay() {
-
-		return mDay;
-	}
-
-	public String getYear() {
-
-		return year;
-	}
-
-	public String getDate() {
-
-		return mDate;
-	}
-
-	public String getMonth() {
-
-		return month;
-	}
-*/
 	public String getDescription() {
 
 		return mDescription;
@@ -134,46 +109,29 @@ public class Event {
 
 	public String getTitle() {
 
-		return title;
+		return mTitle;
 
 	}
 
 	public String getImageUrl() {
 
-		return imageUrl;
+		return mImageUrl;
 
 	}
 
-	
 	public Long getEndTime() {
 
-		return endTime;
+		return mEndTime;
 	}
 
-	public  Long getStartTime() {
+	public Long getStartTime() {
 
-		return startTime;
+		return mStartTime;
 	}
-	
+
 	public Long getGmt() {
 
-		return  gmt;
-	}
-	
-	public Bundle toBundle() {
-		Bundle bundle = new Bundle();
-		bundle.putString("Data", mDescription);
-		//bundle.putString("Hours", hours);
-		bundle.putString("Place", mlocation);
-		//bundle.putString("Date", mDate);
-		bundle.putString("Image", imageUrl);
-		bundle.putString("Image", imageUrl);
-		bundle.putString("Image", imageUrl);
-		bundle.putLong("Gmt", gmt);
-		bundle.putLong("StartTime",startTime);
-		bundle.putLong("EndTime", endTime);
-		
-		return bundle;
+		return mGmt;
 	}
 
 }

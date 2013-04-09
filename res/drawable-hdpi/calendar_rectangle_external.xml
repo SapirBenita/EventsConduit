@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <shape xmlns:android="http://schemas.android.com/apk/res/android" >
-  
-    
-    
-    
-    
-    
-    <padding android:left="33dp" android:top="43dp"
-            android:right="24dp" android:bottom="43dp"
-            
-            
-            
-             />
- 
+
+    <padding
+        android:bottom="43dp"
+        android:left="33dp"
+        android:right="24dp"
+        android:top="43dp" />
+
     <corners android:radius="5dp" />
+
     <solid android:color="#FFCDAE" />
-</shape> 
+
+</shape>
