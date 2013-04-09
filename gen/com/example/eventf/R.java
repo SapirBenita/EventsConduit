@@ -34,23 +34,24 @@ public final class R {
         public static final int share_rectangle=0x7f020007;
     }
     public static final class id {
-        public static final int action_settings=0x7f090010;
+        public static final int action_settings=0x7f090011;
         public static final int background=0x7f090001;
-        public static final int date=0x7f090002;
-        public static final int day=0x7f09000e;
-        public static final int description=0x7f090006;
-        public static final int frame1=0x7f09000a;
+        public static final int date=0x7f090003;
+        public static final int day=0x7f09000f;
+        public static final int description=0x7f090007;
+        public static final int frame1=0x7f09000b;
         public static final int frameLayout1=0x7f090000;
-        public static final int frameLayout2=0x7f090005;
-        public static final int hours=0x7f090003;
-        public static final int img=0x7f09000b;
-        public static final int location=0x7f090008;
-        public static final int month=0x7f09000c;
-        public static final int textView1=0x7f090007;
-        public static final int title=0x7f090004;
-        public static final int titles=0x7f09000f;
-        public static final int viewers=0x7f090009;
-        public static final int year=0x7f09000d;
+        public static final int frameLayout2=0x7f090006;
+        public static final int hours=0x7f090004;
+        public static final int img=0x7f09000c;
+        public static final int location=0x7f090009;
+        public static final int month=0x7f09000d;
+        public static final int sa=0x7f090002;
+        public static final int textView1=0x7f090008;
+        public static final int title=0x7f090005;
+        public static final int titles=0x7f090010;
+        public static final int viewers=0x7f09000a;
+        public static final int year=0x7f09000e;
     }
     public static final class layout {
         public static final int events_detail_activity=0x7f030000;
