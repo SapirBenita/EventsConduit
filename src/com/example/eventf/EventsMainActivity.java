@@ -17,9 +17,9 @@ public class EventsMainActivity extends FragmentActivity implements OnEventSelec
 
 	}
 
-	public void onEventSelected(Event eventData) {
+	public void onEventSelected(Event eventDetail) {
 		Intent intent = new Intent(this, EventsDetailsActivity.class);
-		intent.putExtras(eventData.toBundle());
+		intent.putExtras(eventDetail.toBundle());
 		startActivity(intent);
 	}
 }

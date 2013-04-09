@@ -38,16 +38,16 @@ public class EventsListFragment extends ListFragment {
 	}
 
 	private class GetEventsAsync extends
-			AsyncTask<Void, Integer, ArrayList<Event>> {
+			AsyncTask<Void, Integer, ArrayList<ListEvent>> {
 
 		@Override
-		protected ArrayList<Event> doInBackground(Void... params) {
-			return getEvents();
+		protected ArrayList<ListEvent> doInBackground(Void... params) {
+			return getListEvents();
 		}
 
 		@Override
-		protected void onPostExecute(ArrayList<Event> events) {
-			UserItemAdapter adapter = new UserItemAdapter(getActivity(),
+		protected void onPostExecute(ArrayList<ListEvent> events) {
+			EventslistAdapter adapter = new EventslistAdapter(getActivity(),
 					R.layout.events_list_activitiy, events);
 			getListView().setDivider(null);
 			setListAdapter(adapter);
@@ -56,17 +56,19 @@ public class EventsListFragment extends ListFragment {
 
 	}
 
+	
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		UserItemAdapter adapter = (UserItemAdapter) getListAdapter();
-		Event clickedEvent = adapter.getItem(position);
-		mSelectIf.onEventSelected(clickedEvent);
+		EventslistAdapter adapter = (EventslistAdapter) getListAdapter();
+		ListEvent clickedEvent = adapter.getItem(position);
+		Event event = clickedEvent.getEvent();
+		mSelectIf.onEventSelected(event);
 	}
 
-	public class UserItemAdapter extends ArrayAdapter<Event> {
+	public class EventslistAdapter extends ArrayAdapter<ListEvent> {
 
-		public UserItemAdapter(Context context, int textViewResourceId,ArrayList<Event> events) {
+		public EventslistAdapter(Context context, int textViewResourceId,ArrayList<ListEvent> events) {
 			super(context, textViewResourceId, events);
 		}
 		
@@ -93,16 +95,16 @@ public class EventsListFragment extends ListFragment {
 				viewHolder = (EventItemViewHolder) convertView.getTag();
 			}
 
-			Event event = getItem(position);
+			ListEvent listevent = getItem(position);
 
-			if (event != null) {
+			if (listevent != null) {
 
-				viewHolder.year.setHint(event.getYear());
-				viewHolder.title.setText(event.getTitle());
-				viewHolder.month.setText(event.getMonth().toUpperCase());
-				viewHolder.day.setText(event.getDay());
-				viewHolder.location.setHint(event.getlocation());
-				viewHolder.hours.setHint(event.getHours());
+				viewHolder.year.setHint(listevent.getYear());
+				viewHolder.title.setText(listevent.getEvent().getTitle());
+				viewHolder.month.setText(listevent.getMonth().toUpperCase());
+				viewHolder.day.setText(listevent.getDay());
+				viewHolder.location.setHint(listevent.getEvent().getlocation());
+				viewHolder.hours.setHint(listevent.getHours());
 			}
 			return convertView;
 		}
@@ -119,10 +121,10 @@ public class EventsListFragment extends ListFragment {
 
 	}
 
-	public ArrayList<Event> getEvents() {
+	public ArrayList<ListEvent> getListEvents() {
 
 		String searchUrl = "http://cms.mobile.conduit-services.com/calendar/2/?id=8592gjltnhrujne0m08i4jgp04%40group.calendar.google.com&max-results=25&start-index=0&since=%24date&until=%24date%2B6m&params=%7B%22order%22%3A%22asc%22%7D";
-		ArrayList<Event> events = new ArrayList<Event>();
+		ArrayList<ListEvent> listevents = new ArrayList<ListEvent>();
 
 		HttpClient client = new DefaultHttpClient();
 		HttpGet get = new HttpGet(searchUrl);
@@ -157,12 +159,7 @@ public class EventsListFragment extends ListFragment {
 			e.printStackTrace();
 		}
 
-		String date, dayString, day, hours, month, location;
-		String year;
-		
-		long startTime;
-		long endTime;
-		long gmt;
+		String  location;
 		int i;
 		JSONObject eventDetailsJsonObj;
 		JSONObject jsonObjectTimes;
@@ -170,6 +167,7 @@ public class EventsListFragment extends ListFragment {
 		for (i = 0; i < jsonArray.length(); i++)
 			try {
 				Event event = new Event();
+				
 				
 				eventDetailsJsonObj=jsonArray.getJSONObject(i);
 				
@@ -183,52 +181,48 @@ public class EventsListFragment extends ListFragment {
 				jsonArrayTimes = (eventDetailsJsonObj).getJSONArray("times");
 				jsonObjectTimes=jsonArrayTimes.getJSONObject(0);
 				
-				endTime = jsonObjectTimes.getJSONObject("end").optLong("localTime");
-				startTime = jsonObjectTimes.getJSONObject("start").optLong("localTime");
-				gmt = jsonObjectTimes.getJSONObject("start").optLong("timeZoneOffset");
+				 event.setEndTime(jsonObjectTimes.getJSONObject("end").optLong("localTime"));
+				event.setStartTime(jsonObjectTimes.getJSONObject("start").optLong("localTime"));
+				event.setGmt(jsonObjectTimes.getJSONObject("start").optLong("timeZoneOffset"));
 
 				Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT"), Locale.ENGLISH);
 				
-				cal.setTimeInMillis(startTime * 1000);
-				int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
-				String monthStr = String.format(Locale.US,"%tB", cal);
-                
-				TimeZone tz = cal.getTimeZone();
-				SimpleDateFormat sdf = new SimpleDateFormat(
-						"yyyy,MMMMM,d,h:mmaaa,EEEEEEEE", Locale.ENGLISH);
-				sdf.setTimeZone(tz);
-
-				Date startDate = new Date(startTime * 1000);
-				
-				
-				String localTimeStart = sdf.format(new Date(startTime * 1000));
-				String localTimeEnd = sdf.format(new Date(endTime * 1000));
-				String[] partsEnd = localTimeEnd.split(",");
-				String[] partsStart = localTimeStart.split(",");
-
-				year = partsStart[0];
-				month = partsStart[1];
-				day = partsStart[2];
-				dayString = partsStart[4];
-				hours = partsStart[3] + " - " + partsEnd[3] + " (GMT";
-
-				if (gmt < 0)
-					hours = hours + " " + gmt + ")";
-				else if (gmt > 0)
-					hours = hours + "+" + gmt + ")";
-				else
-					hours = hours + ")";
-				date = dayString + ",  " + month + " " + day + ", " + year;
-
-			
-
-				event.setHours(hours);
-				event.setDay(day);
-				event.setMonth(month);
-				event.setYear(year);
-				event.setDate(date);
-				
-				events.add(event);
+				/*
+				 * cal.setTimeInMillis(startTime * 1000); int dayOfMonth =
+				 * cal.get(Calendar.DAY_OF_MONTH); String monthStr =
+				 * String.format(Locale.US,"%tB", cal);
+				 * 
+				 * TimeZone tz = cal.getTimeZone(); SimpleDateFormat sdf = new
+				 * SimpleDateFormat( "yyyy,MMMMM,d,h:mmaaa,EEEEEEEE",
+				 * Locale.ENGLISH); sdf.setTimeZone(tz);
+				 * 
+				 * Date startDate = new Date(startTime * 1000);
+				 * 
+				 * 
+				 * String localTimeStart = sdf.format(new Date(startTime *
+				 * 1000)); String localTimeEnd = sdf.format(new Date(endTime *
+				 * 1000)); String[] partsEnd = localTimeEnd.split(","); String[]
+				 * partsStart = localTimeStart.split(",");
+				 * 
+				 * year = partsStart[0]; month = partsStart[1]; day =
+				 * partsStart[2]; dayString = partsStart[4]; hours =
+				 * partsStart[3] + " - " + partsEnd[3] + " (GMT";
+				 * 
+				 * if (gmt < 0) hours = hours + " " + gmt + ")"; else if (gmt >
+				 * 0) hours = hours + "+" + gmt + ")"; else hours = hours + ")";
+				 * date = dayString + ",  " + month + " " + day + ", " + year;
+				 * 
+				 * 
+				 * // event.setEndTime(endTime);
+				 * //event.setStartTime(startTime); //event.setGmt(gmt);
+				 * 
+				 * 
+				 * event.setHours(hours); event.setDay(day);
+				 * event.setMonth(month); event.setYear(year);
+				 * event.setDate(date);
+				 */
+				ListEvent listEventItem = new ListEvent(event);
+				listevents.add(listEventItem);
 
 			}
 
@@ -236,7 +230,7 @@ public class EventsListFragment extends ListFragment {
 				// do nothing - just do not add this event to the list.
 			}
 
-		return events;
+		return listevents;
 
 	}
 

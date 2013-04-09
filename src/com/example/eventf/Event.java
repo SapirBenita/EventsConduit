@@ -4,14 +4,18 @@ import android.os.Bundle;
 
 public class Event {
 
-	private String mDate;
+	
+	long endTime; 
+	long startTime;
+	long gmt;
+	//private String mDate;
 	private String mDescription;
-	private String mDay;
-	private String month;
+	//private String mDay;
+	//private String month;
 	private String mlocation;
-	private String hours;
+	//private String hours;
 	private String title;
-	private String year;
+//	private String year;
 	private String imageUrl;
     static final String DATA="Data";
    
@@ -19,28 +23,47 @@ public class Event {
 
 	public Event(Bundle dataBundle) {
 		mDescription = dataBundle.getString("Data");
-		hours = dataBundle.getString("Hours");
+		//hours = dataBundle.getString("Hours");
 		mlocation = dataBundle.getString("Place");
 		title = dataBundle.getString("Title");
-		mDate = dataBundle.getString("Date");
+		//mDate = dataBundle.getString("Date");
 		imageUrl = dataBundle.getString("Image");
+		endTime = dataBundle.getLong("EndTime");
+		startTime = dataBundle.getLong("StartTime");
+		 gmt = dataBundle.getLong("Gmt");
+	}
+	
+	public void setEndTime(Long endTime) {
+
+		this.endTime = endTime;
 	}
 
-	public void setHours(String hours) {
+	public void setStartTime(Long startTime) {
+
+		this.startTime = startTime;
+	}
+	
+	public void setGmt(Long gmt) {
+
+		this.gmt = gmt;
+	}
+	
+	
+	/*public void setHours(String hours) {
 
 		this.hours = hours;
-	}
+	}*/
 
-	public void setDay(String day) {
+/*	public void setDay(String day) {
 
 		this.mDay = day;
-	}
+	}*/
 
-	public void setYear(String year) {
+	/*public void setYear(String year) {
 
 		this.year = year;
-	}
-
+	}*/
+/*
 	public void setDate(String date) {
 
 		this.mDate = date;
@@ -50,7 +73,7 @@ public class Event {
 
 		this.month = month;
 	}
-
+*/
 	public void setDescription(String description) {
 
 		this.mDescription = description;
@@ -75,7 +98,7 @@ public class Event {
 
 	/** Setters **/
 
-	public String getHours() {
+	/*public String getHours() {
 		return hours;
 	}
 
@@ -98,7 +121,7 @@ public class Event {
 
 		return month;
 	}
-
+*/
 	public String getDescription() {
 
 		return mDescription;
@@ -121,13 +144,35 @@ public class Event {
 
 	}
 
+	
+	public Long getEndTime() {
+
+		return endTime;
+	}
+
+	public  Long getStartTime() {
+
+		return startTime;
+	}
+	
+	public Long getGmt() {
+
+		return  gmt;
+	}
+	
 	public Bundle toBundle() {
 		Bundle bundle = new Bundle();
 		bundle.putString("Data", mDescription);
-		bundle.putString("Hours", hours);
+		//bundle.putString("Hours", hours);
 		bundle.putString("Place", mlocation);
-		bundle.putString("Date", mDate);
+		//bundle.putString("Date", mDate);
 		bundle.putString("Image", imageUrl);
+		bundle.putString("Image", imageUrl);
+		bundle.putString("Image", imageUrl);
+		bundle.putLong("Gmt", gmt);
+		bundle.putLong("StartTime",startTime);
+		bundle.putLong("EndTime", endTime);
+		
 		return bundle;
 	}
 
