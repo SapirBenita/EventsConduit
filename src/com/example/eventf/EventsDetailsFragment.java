@@ -29,7 +29,7 @@ public class EventsDetailsFragment extends Fragment {
 		mHours = EventsTimeDesign.eventsHoursDesign(event.getStartTime(),
 				event.getEndTime(), event.getGmt());
 		mDate = EventsTimeDesign.eventsDateDesign(event.getStartTime());
-		
+	
 		detailsAquery.find(R.id.hours).text(mHours);
 		detailsAquery.find(R.id.date).text(mDate);
 		detailsAquery.find(R.id.title).text(event.getTitle());

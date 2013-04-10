@@ -11,7 +11,7 @@
         <FrameLayout
             android:id="@+id/frameLayout1"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+            android:layout_height="wrap_content">"
 
             <ImageView
                 android:id="@+id/background"
@@ -24,16 +24,23 @@
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="27dp"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="100" >
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="70"
                     android:orientation="vertical"
-                    android:background="#123456" >
+                    >
+                    
+                    
+            <ImageView
+                android:background="@drawable/datail_rectangle"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                 />
 
                     <TextView
                         android:id="@+id/date"
@@ -65,7 +72,7 @@
                         android:textSize="15dp"
                         android:textStyle="bold" />
 
-                </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
         </FrameLayout>
 

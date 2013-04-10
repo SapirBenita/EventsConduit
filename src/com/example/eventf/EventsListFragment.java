@@ -158,7 +158,7 @@ public class EventsListFragment extends ListFragment {
 				location = eventDetailsJsonObj.optString("location");
 				location = location + "\n";
 				event.setLocation(location);
-				event.setTitle(eventDetailsJsonObj.optString("title"));
+			    event.setTitle(eventDetailsJsonObj.optString("title"));
 				event.setImageUrl(eventDetailsJsonObj.optString("imageUrl"));
 
 				jsonArrayTimes = (eventDetailsJsonObj).getJSONArray("times");
